@@ -204,7 +204,7 @@ uint32_t sdk_system_get_userbin_addr(void) {
 
     if (!(sdk_g_ic.s.boot_info >> 7)) {
         if (sdk_g_ic.s._unknown1d8 & 0x4) {
-            addr = sdk_g_ic.s.user1_addr[0] | (sdk_g_ic.s.user1_addr[1] << 8) | 
+            addr = sdk_g_ic.s.user1_addr[0] | (sdk_g_ic.s.user1_addr[1] << 8) |
 (sdk_g_ic.s.user1_addr[2] << 16);
         } else {
             addr = sdk_g_ic.s.user0_addr[0] | (sdk_g_ic.s.user0_addr[1] << 8) | (sdk_g_ic.s.user0_addr[2] << 16);
@@ -268,7 +268,7 @@ bool sdk_system_restart_enhance(uint8_t bin_type, uint32_t bin_addr) {
             printf("test already passed.\n");
             return false;
         }
-       
+
         printf("reboot to use test bin @ %x\n", bin_addr);
         sdk_g_ic.s.user0_addr[0] = bin_addr;
         sdk_g_ic.s.user0_addr[1] = bin_addr >> 8;
@@ -276,7 +276,7 @@ bool sdk_system_restart_enhance(uint8_t bin_type, uint32_t bin_addr) {
         sdk_g_ic.s.boot_info &= 0xbf;
         sdk_wifi_param_save_protect(&sdk_g_ic.s);
         sdk_system_restart();
-       
+
         return true;
     }
 }
@@ -408,7 +408,7 @@ static void _deep_sleep_phase2(void *timer_arg) {
     RTC.RESET_REASON0 = 0x00100000;
 }
 
-void sdk_system_deep_sleep(uint32_t time_in_us) {
+void sdk_system_deep_sleep(uint32_t time_in_us, uint32_t delay_in_us) {
     if (sdk_wifi_get_opmode() != 2) {
         sdk_wifi_station_stop();
     }
@@ -422,7 +422,7 @@ void sdk_system_deep_sleep(uint32_t time_in_us) {
     // same timer. So now deep sleep function uses a separate timer.
     sdk_ets_timer_disarm(&deep_sleep_timer);
     sdk_ets_timer_setfn(&deep_sleep_timer, _deep_sleep_phase2, (void *)time_in_us);
-    sdk_ets_timer_arm(&deep_sleep_timer, 100, 0);
+    sdk_ets_timer_arm(&deep_sleep_timer, delay_in_us, 0);
 }
 
 bool sdk_system_update_cpu_freq(uint8_t freq) {
@@ -507,7 +507,7 @@ uint32_t sdk_system_get_chip_id(void) {
 uint32_t sdk_system_rtc_clock_cali_proc(void) {
     return sdk_pm_rtc_clock_cali_proc();
 }
-    
+
 uint32_t sdk_system_get_rtc_time(void) {
     return RTC.COUNTER;
 }

@@ -45,7 +45,7 @@ enum sdk_sleep_type sdk_wifi_get_sleep_type(void);
 void sdk_system_restore(void);
 void sdk_system_restart(void);
 bool sdk_system_deep_sleep_set_option(uint8_t option);
-void sdk_system_deep_sleep(uint32_t time_in_us);
+void sdk_system_deep_sleep(uint32_t time_in_us, uint32_t delay_in_us);
 
 uint32_t sdk_system_get_time(void);
 

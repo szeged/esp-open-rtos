@@ -29,7 +29,7 @@ static fs_buf_t cache_buf = {0};
  */
 #define ESP_SPIFFS_FD_NUMBER       5
 
-#define ESP_SPIFFS_CACHE_PAGES     5
+#define ESP_SPIFFS_CACHE_PAGES     1
 
 static s32_t esp_spiffs_read(u32_t addr, u32_t size, u8_t *dst)
 {

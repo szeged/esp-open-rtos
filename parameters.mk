@@ -127,7 +127,8 @@ ifeq ($(GITSHORTREV),\"\")
 endif
 CPPFLAGS += -DGITSHORTREV=$(GITSHORTREV)
 
-LINKER_SCRIPTS += $(ROOT)ld/program.ld $(ROOT)ld/rom.ld
+LINKER_SCRIPTS ?= $(ROOT)ld/program.ld
+LINKER_SCRIPTS += $(ROOT)ld/rom.ld
 
 # rboot firmware binary paths for flashing
 RBOOT_ARGS ?= 0x0 $(RBOOT_BIN) 0x1000 $(RBOOT_CONF)

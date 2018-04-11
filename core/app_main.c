@@ -519,4 +519,3 @@ static __attribute__((noinline)) void dump_flash_config_sectors(uint32_t start_s
     printf("\nboot info:\n");
     dump_flash_sector(start_sector + 3, BOOT_INFO_SIZE);
 }
-
