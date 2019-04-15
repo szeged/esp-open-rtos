@@ -1,4 +1,4 @@
-# Parameters for the esp-open-rtos make process
+  # Parameters for the esp-open-rtos make process
 #
 # You can edit this file to change parameters, but a better option is
 # to create a local.mk file and add overrides there. The local.mk file
@@ -127,7 +127,8 @@ ifeq ($(GITSHORTREV),\"\")
 endif
 CPPFLAGS += -DGITSHORTREV=$(GITSHORTREV)
 
-LINKER_SCRIPTS += $(ROOT)ld/program.ld $(ROOT)ld/rom.ld
+LINKER_SCRIPTS ?= $(ROOT)ld/program.ld
+LINKER_SCRIPTS += $(ROOT)ld/rom.ld
 
 # rboot firmware binary paths for flashing
 RBOOT_ARGS ?= 0x0 $(RBOOT_BIN) 0x1000 $(RBOOT_CONF)
